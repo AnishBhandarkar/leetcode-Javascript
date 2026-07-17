@@ -1,0 +1,25 @@
+2648. Generate Fibonacci Sequence
+
+
+/**
+ * @return {Generator<number>}
+ */
+var fibGenerator = function* () {
+    let f1 = 0;
+    let f2 = 1;
+    let f3 = null;
+    yield f1;
+    yield f2;
+    while (true) {
+        f3 = f1 + f2;
+        f1 = f2;
+        f2 = f3;
+        yield f3;
+    }
+};
+
+/**
+ * const gen = fibGenerator();
+ * gen.next().value; // 0
+ * gen.next().value; // 1
+ */
