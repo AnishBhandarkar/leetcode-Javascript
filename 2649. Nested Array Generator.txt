@@ -1,0 +1,54 @@
+2649. Nested Array Generator
+
+
+// Approach 1: Using flat()
+
+
+/**
+ * @param {Array} arr
+ * @return {Generator}
+ */
+var inorderTraversal = function* (arr) {
+    let flattenedArr = arr.flat(Infinity);
+    for (let ele of flattenedArr) {
+        yield ele;
+    }
+};
+
+/**
+ * const gen = inorderTraversal([1, [2, 3]]);
+ * gen.next().value; // 1
+ * gen.next().value; // 2
+ * gen.next().value; // 3
+ */
+
+
+
+
+---
+
+
+// Approach 2:
+
+
+/**
+ * @param {Array} arr
+ * @return {Generator}
+ */
+var inorderTraversal = function* (arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            yield* inorderTraversal(arr[i]);
+        } else {
+            yield arr[i];
+        }
+    }
+};
+
+/**
+ * const gen = inorderTraversal([1, [2, 3]]);
+ * gen.next().value; // 1
+ * gen.next().value; // 2
+ * gen.next().value; // 3
+ */
+
