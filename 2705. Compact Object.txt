@@ -1,0 +1,28 @@
+2705. Compact Object
+
+
+/**
+ * @param {Object|Array} obj
+ * @return {Object|Array}
+ */
+var compactObject = function (obj) {
+    if (obj === null || typeof obj !== 'object') {
+        return obj;
+    }
+
+    const result = Array.isArray(obj) ? [] : {};
+
+    for (let ele in obj) {
+        const compacted = compactObject(obj[ele]);
+
+        if (Boolean(compacted)) {
+            if (Array.isArray(result)) {
+                result.push(compacted);
+            } else {
+                result[ele] = compacted;
+            }
+        }
+    }
+
+    return result;
+};
