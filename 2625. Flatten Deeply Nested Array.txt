@@ -1,0 +1,29 @@
+2625. Flatten Deeply Nested Array
+
+
+/**
+ * @param {Array} arr
+ * @param {number} depth
+ * @return {Array}
+ */
+var flat = function (arr, n) {
+    if (n === 0) {
+        return arr;
+    }
+
+    const result = [];
+
+    const dfs = (arr, n) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i]) && n > 0) {
+                helper(arr[i], n - 1);
+            } else {
+                result.push(arr[i]);
+            }
+        }
+    };
+
+    dfs(arr, n);
+
+    return result;
+};
