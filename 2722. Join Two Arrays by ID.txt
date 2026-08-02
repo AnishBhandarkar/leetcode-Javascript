@@ -1,0 +1,39 @@
+2722. Join Two Arrays by ID
+
+
+
+/**
+ * @param {Array} arr1
+ * @param {Array} arr2
+ * @return {Array}
+ */
+var join = function (arr1, arr2) {
+    const map = new Map();
+
+    for (let ele of arr1) {
+        map.set(ele['id'], ele);
+    }
+
+    const joinedArray = [];
+
+    joinedArray.push(...arr1);
+
+    for (let ele of arr2) {
+        if (!map.has(ele['id'])) {
+            joinedArray.push(ele);
+        } else {
+            let obj = map.get(ele['id']);
+            console.log(obj);
+            for (let key in ele) {
+                obj[key] = ele[key];
+            }
+        }
+    }
+
+    return joinedArray.sort((a, b) => a.id - b.id);
+};
+
+/*
+T(n) = O(n + m + (n+m) log(n+m))
+S(n) = O(n)
+*/
